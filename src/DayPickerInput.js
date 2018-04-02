@@ -1,7 +1,9 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import DayPicker from './DayPicker';
+import TimePicker from './TimePicker';
 import { getModifiersForDay } from './ModifiersUtils';
 import { ESC, TAB } from './keys';
 
@@ -97,9 +99,9 @@ export default class DayPickerInput extends React.Component {
     keepFocus: true,
     component: 'input',
     inputProps: {},
-    overlayComponent: ({ children, classNames }) => (
-      <div className={classNames.overlayWrapper}>
-        <div className={classNames.overlay}>{children}</div>
+    overlayComponent: ({ children, classNames, style }) => (
+      <div className={classNames.overlayWrapper} >
+        <div className={classNames.overlay} style={style}>{children}</div>
       </div>
     ),
     classNames: {
@@ -301,6 +303,7 @@ export default class DayPickerInput extends React.Component {
   }
 
   handleOverlayBlur(e) {
+    console.log('handleOverlayBlur', e.relatedTarget);
     this.setState({
       showOverlay:
         this.overlayNode && this.overlayNode.contains(e.relatedTarget),
@@ -450,6 +453,7 @@ export default class DayPickerInput extends React.Component {
           month={this.state.month}
           selectedDay={selectedDay}
           input={this.input}
+          style={{'display':'grid','grid-template-columns':'1fr 1fr'}}
         >
           <DayPicker
             ref={el => (this.daypicker = el)}
@@ -460,6 +464,17 @@ export default class DayPickerInput extends React.Component {
             onDayClick={this.handleDayClick}
             onMonthChange={this.handleMonthChange}
           />
+          <TimePicker
+            ref={el => (this.timepicker = el)}
+            onTodayButtonClick={onTodayButtonClick}
+            {...dayPickerProps}
+            month={this.state.month}
+            selectedDays={selectedDay}
+            onDayClick={this.handleDayClick}
+            onMonthChange={this.handleMonthChange}
+          >
+            HELOooooooooo
+          </TimePicker>
         </Overlay>
       </span>
     );
@@ -486,3 +501,4 @@ export default class DayPickerInput extends React.Component {
     );
   }
 }
+/* eslint-disable */
