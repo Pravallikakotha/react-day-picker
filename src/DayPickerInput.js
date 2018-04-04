@@ -278,7 +278,8 @@ export default class DayPickerInput extends React.Component {
 
   handleInputFocus(e) {
     this.showDayPicker();
-    if (this.props.inputProps.onFocus) {
+    console.log(e.target.type);
+    if (this.props.inputProps.onFocus ) {
       e.persist();
       this.props.inputProps.onFocus(e);
     }
@@ -296,9 +297,9 @@ export default class DayPickerInput extends React.Component {
   }
 
   handleOverlayFocus(e) {
-    if (this.props.keepFocus === true) {
+    if (this.props.keepFocus === false) {
       e.preventDefault();
-      this.input.focus();
+      e.target.focus();
     }
   }
 
@@ -453,7 +454,6 @@ export default class DayPickerInput extends React.Component {
           month={this.state.month}
           selectedDay={selectedDay}
           input={this.input}
-          style={{'display':'grid','grid-template-columns':'1fr 1fr'}}
         >
           <DayPicker
             ref={el => (this.daypicker = el)}
@@ -464,17 +464,6 @@ export default class DayPickerInput extends React.Component {
             onDayClick={this.handleDayClick}
             onMonthChange={this.handleMonthChange}
           />
-          <TimePicker
-            ref={el => (this.timepicker = el)}
-            onTodayButtonClick={onTodayButtonClick}
-            {...dayPickerProps}
-            month={this.state.month}
-            selectedDays={selectedDay}
-            onDayClick={this.handleDayClick}
-            onMonthChange={this.handleMonthChange}
-          >
-            HELOooooooooo
-          </TimePicker>
         </Overlay>
       </span>
     );
